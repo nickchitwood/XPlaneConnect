@@ -74,12 +74,12 @@ void printError(char *functionName, char *format, ...)
 /*****************************************************************************/
 /****                       Low Level UDP functions                       ****/
 /*****************************************************************************/
-XPCSocket openUDP(const char *xpIP)
+XPCSocket EXPORT openUDP(const char *xpIP)
 {
 	return aopenUDP(xpIP, 49009, 0);
 }
 
-XPCSocket aopenUDP(const char *xpIP, unsigned short xpPort, unsigned short port)
+XPCSocket EXPORT aopenUDP(const char *xpIP, unsigned short xpPort, unsigned short port)
 {
 	XPCSocket sock;
 
@@ -132,7 +132,7 @@ XPCSocket aopenUDP(const char *xpIP, unsigned short xpPort, unsigned short port)
 	return sock;
 }
 
-void closeUDP(XPCSocket sock)
+void EXPORT closeUDP(XPCSocket sock)
 {
 #ifdef _WIN32
 	int result = closesocket(sock.sock);
@@ -236,7 +236,7 @@ int readUDP(XPCSocket sock, char buffer[], int len)
 /*****************************************************************************/
 /****                      Configuration functions                        ****/
 /*****************************************************************************/
-int setCONN(XPCSocket* sock, unsigned short port)
+int EXPORT setCONN(XPCSocket* sock, unsigned short port)
 {
 	// Set up command
 	char buffer[32] = "CONN";
@@ -270,7 +270,7 @@ int setCONN(XPCSocket* sock, unsigned short port)
 	return -3;
 }
 
-int pauseSim(XPCSocket sock, char pause)
+int EXPORT pauseSim(XPCSocket sock, char pause)
 {
 	// Validte input
 	if (pause < 0 || (pause > 2 && pause < 100) || (pause > 119 && pause < 200) || pause > 219)
@@ -298,7 +298,7 @@ int pauseSim(XPCSocket sock, char pause)
 /*****************************************************************************/
 /****                    X-Plane UDP Data functions                       ****/
 /*****************************************************************************/
-int sendDATA(XPCSocket sock, float data[][9], int rows)
+int EXPORT sendDATA(XPCSocket sock, float data[][9], int rows)
 {
 	// Preconditions
 	// There are only 134 DATA rows in X-Plane. Realistically, clients probably
@@ -329,7 +329,7 @@ int sendDATA(XPCSocket sock, float data[][9], int rows)
 	return 0;
 }
 
-int readDATA(XPCSocket sock, float data[][9], int rows)
+int EXPORT readDATA(XPCSocket sock, float data[][9], int rows)
 {
 	// Preconditions
 	// There are only 134 DATA rows in X-Plane. Realistically, clients probably
@@ -378,12 +378,12 @@ int readDATA(XPCSocket sock, float data[][9], int rows)
 /*****************************************************************************/
 /****                          DREF functions                             ****/
 /*****************************************************************************/
-int sendDREF(XPCSocket sock, const char* dref, float value[], int size)
+int EXPORT sendDREF(XPCSocket sock, const char* dref, float value[], int size)
 {
 	return sendDREFs(sock, &dref, &value, &size, 1);
 }
 
-int sendDREFs(XPCSocket sock, const char* drefs[], float* values[], int sizes[], int count)
+int EXPORT sendDREFs(XPCSocket sock, const char* drefs[], float* values[], int sizes[], int count)
 {
 	// Setup command
 	// Max size is technically unlimited.
@@ -505,12 +505,12 @@ int getDREFResponse(XPCSocket sock, float* values[], unsigned char count, int si
 	return 0;
 }
 
-int getDREF(XPCSocket sock, const char* dref, float values[], int* size)
+int EXPORT getDREF(XPCSocket sock, const char* dref, float values[], int* size)
 {
 	return getDREFs(sock, &dref, &values, 1, size);
 }
 
-int getDREFs(XPCSocket sock, const char* drefs[], float* values[], unsigned char count, int sizes[])
+int EXPORT getDREFs(XPCSocket sock, const char* drefs[], float* values[], unsigned char count, int sizes[])
 {
 	// Send Command
 	int result = sendDREFRequest(sock, drefs, count);
@@ -537,7 +537,7 @@ int getDREFs(XPCSocket sock, const char* drefs[], float* values[], unsigned char
 /*****************************************************************************/
 /****                          POSI functions                             ****/
 /*****************************************************************************/
-int getPOSI(XPCSocket sock, float values[7], char ac)
+int EXPORT getPOSI(XPCSocket sock, float values[7], char ac)
 {
 	// Setup send command
 	unsigned char buffer[6] = "GETP";
@@ -570,7 +570,7 @@ int getPOSI(XPCSocket sock, float values[7], char ac)
 	return 0;
 }
 
-int sendPOSI(XPCSocket sock, double values[], int size, char ac)
+int EXPORT sendPOSI(XPCSocket sock, double values[], int size, char ac)
 {
 	// Validate input
 	if (ac < 0 || ac > 20)
@@ -624,7 +624,7 @@ int sendPOSI(XPCSocket sock, double values[], int size, char ac)
 /*****************************************************************************/
 /****                          CTRL functions                             ****/
 /*****************************************************************************/
-int getCTRL(XPCSocket sock, float values[7], char ac)
+int EXPORT getCTRL(XPCSocket sock, float values[7], char ac)
 {
 	// Setup send command
 	unsigned char buffer[6] = "GETC";
@@ -659,7 +659,7 @@ int getCTRL(XPCSocket sock, float values[7], char ac)
 	return 0;
 }
 
-int sendCTRL(XPCSocket sock, float values[], int size, char ac)
+int EXPORT sendCTRL(XPCSocket sock, float values[], int size, char ac)
 {
 	// Validate input
 	if (ac < 0 || ac > 20)
@@ -714,7 +714,7 @@ int sendCTRL(XPCSocket sock, float values[], int size, char ac)
 /*****************************************************************************/
 /****                        Drawing functions                            ****/
 /*****************************************************************************/
-int sendTEXT(XPCSocket sock, char* msg, int x, int y)
+int EXPORT sendTEXT(XPCSocket sock, char* msg, int x, int y)
 {
 	if (msg == NULL)
 	{
@@ -757,7 +757,7 @@ int sendTEXT(XPCSocket sock, char* msg, int x, int y)
 	return 0;
 }
 
-int sendWYPT(XPCSocket sock, WYPT_OP op, float points[], int count)
+int EXPORT sendWYPT(XPCSocket sock, WYPT_OP op, float points[], int count)
 {
 	// Input Validation
 	if (op < XPC_WYPT_ADD || op > XPC_WYPT_CLR)
@@ -794,7 +794,7 @@ int sendWYPT(XPCSocket sock, WYPT_OP op, float points[], int count)
 /*****************************************************************************/
 /****                          View functions                             ****/
 /*****************************************************************************/
-int sendVIEW(XPCSocket sock, VIEW_TYPE view)
+int EXPORT sendVIEW(XPCSocket sock, VIEW_TYPE view)
 {
 	// Validate Input
 	if (view < XPC_VIEW_FORWARDS || view > XPC_VIEW_FULLSCREENNOHUD)
