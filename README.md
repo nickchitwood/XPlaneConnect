@@ -9,17 +9,6 @@ in-house flight simulation software. Possible applications include active contro
 of an XPlane simulation, flight visualization, recording states during a flight,
 or interacting with a mission over UDP.
 
-### Migrating to 1.0
-For existing users, several important breaking changes have been made in version
-1.0. For detailed information, see the 1.0 release changelog. For client-specific
-guidelines on migrating to 1.0, refer to the follwing guides:
-
-#### [C](https://github.com/nasa/XPlaneConnect/wiki/Migrating-to-1.0-C)
-
-#### [MATLAB](https://github.com/nasa/XPlaneConnect/wiki/Migrating-to-1.0-MATLAB)
-
-#### [Java](https://github.com/nasa/XPlaneConnect/wiki/Migrating-to-1.0-Java)
-
 ### Architecture
 XPC includes an X-Plane plugin (xpcPlugin) and clients written in several
 languages that interact with the plugin.
@@ -27,10 +16,10 @@ languages that interact with the plugin.
 #### Quick Start
 To get started using X-Plane Connect, do the following.
 
-1. Purchase and install X-Plane 9 or 10.
-2. Copy the X-Plane Plugin folder (`xpcPlugin/XPlaneConnect`) to the plugin
-directory (`[X-Plane Directory]/Resources/plugins/`)
-3. Write some code using one of the clients to manipulate X-Plane data.
+1. Purchase and install X-Plane 9, 10 or 11.
+2. Download the `XPlaneConnect.zip` file from the latest release on the [releases](https://github.com/nasa/XPlaneConnect/releases) page.
+3. Copy the contents of the .zip archive to the plugin directory (`[X-Plane Directory]/Resources/plugins/`)
+4. Write some code using one of the clients to manipulate X-Plane data.
 
 Each client is located in a top-level directory of the repository named for the
 client's language. The client directories generally include a `src` folder
@@ -55,9 +44,9 @@ physics simulation engine.
 ### Compatibility
 XPC has been tested with the following software versions:
 * Windows: Vista, 7, & 8
-* Mac OSX: 10.8-10.11
+* Mac OSX: 10.8-10.14
 * Linux: Tested on Red Hat Enterprise Linux Workstation release 6.6
-* X-Plane: 9 & 10
+* X-Plane: 9, 10 & 11
 
 ### Contributing
 All contributions are welcome! If you are having problems with the plugin, please
@@ -68,7 +57,7 @@ the next official release.
 
 
 ### Notices
-Copyright ©2013-2017 United States Government as represented by the Administrator
+Copyright ©2013-2018 United States Government as represented by the Administrator
 of the National Aeronautics and Space Administration.  All Rights Reserved.
 
 No Warranty: THE SUBJECT SOFTWARE IS PROVIDED "AS IS" WITHOUT ANY WARRANTY OF ANY
@@ -102,14 +91,14 @@ Software without restriction, including without limitation the rights to use,
 copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the
 Software, and to permit persons to whom the Software is furnished to do so,
 subject to the following conditions:
- 
+
 * Redistributions of source code must retain the above copyright notice, this
   list of conditions and the following disclaimer.
 * Neither the names of the authors nor that of X-Plane or Laminar Research may
   be used to endorse or promote products derived from this software without
   specific prior written permission from the authors or Laminar Research,
   respectively.
- 
+
 X-Plane API SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS
 IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
 IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
